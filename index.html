@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot Interface</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="config-section">
+            <input type="text" id="api-endpoint" placeholder="API Endpoint URL">
+            <input type="text" id="bot-identifier" placeholder="AI Model Identifier">
+            <input type="password" id="api-key" placeholder="Optional API Key">
+            <div class="action-buttons">
+                <button id="dark-mode-toggle" class="dark-mode-btn">
+                    <span class="dark-mode-icon">🌙</span>
+                    <span class="dark-mode-icon">☀️</span>
+                </button>
+                <button id="new-chat-btn" class="new-chat-btn">
+                    <span>➕</span> New Chat
+                </button>
+                <label for="image-upload" class="image-upload-btn">
+                    <span>📸</span> Upload Image
+                </label>
+                <input type="file" id="image-upload" accept="image/*" style="display: none;">
+            </div>
+        </div>
+        <div class="token-usage">
+            <span id="total-tokens">Total Tokens: 0</span>
+        </div>
+        <div class="chat-container">
+            <div id="chat-messages" class="chat-messages"></div>
+            <div class="uploaded-image-preview">
+                <img id="uploaded-image" src="" alt="Uploaded Image" style="display: none; max-width: 300px; max-height: 300px;">
+                <button id="remove-image" style="display: none;">Remove Image</button>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="user-message" placeholder="Type your message here...">
+                <button id="send-btn">Send</button>
+            </div>
+        </div>
+        <div id="loading-overlay" class="loading-overlay">
+            <div class="loading-spinner">
+                <div class="spinner-dot"></div>
+                <div class="spinner-dot"></div>
+                <div class="spinner-dot"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.0/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        // Configure marked with highlight.js
+        marked.setOptions({
+            highlight: function(code, lang) {
+                const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+                return hljs.highlight(code, { language }).value;
+            },
+            langPrefix: 'hljs language-',
+            breaks: true,
+            gfm: true
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
